@@ -11,6 +11,7 @@ import com.willfp.ecoenchants.config.RarityYml
 import com.willfp.ecoenchants.config.TargetsYml
 import com.willfp.ecoenchants.config.TypesYml
 import com.willfp.ecoenchants.config.VanillaEnchantsYml
+import com.willfp.ecoenchants.display.CapybaraChatDisplay
 import com.willfp.ecoenchants.display.DisplayCache
 import com.willfp.ecoenchants.display.EnchantDisplay
 import com.willfp.ecoenchants.display.EnchantSorter
@@ -109,7 +110,8 @@ class EcoEnchantsPlugin : LibreforgePlugin() {
             LootSupport(this),
             AnvilSupport(this),
             LoreConversion(this),
-            GrindstoneSupport(this)
+            GrindstoneSupport(this),
+            CapybaraChatDisplay()
         )
     }
 

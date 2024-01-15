@@ -7,10 +7,8 @@ import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.display.getFormattedName
 import com.willfp.ecoenchants.enchant.impl.EcoEnchantBase
 import com.willfp.ecoenchants.enchant.impl.LibreforgeEcoEnchant
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentRepairing
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentReplenish
-import com.willfp.ecoenchants.enchant.impl.hardcoded.EnchantmentSoulbound
+import com.willfp.ecoenchants.enchant.impl.hardcoded.*
+import com.willfp.ecoenchants.enchant.impl.hardcoded.legacy.*
 import com.willfp.ecoenchants.enchant.registration.modern.ModernEnchantmentRegistererProxy
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
@@ -113,7 +111,13 @@ object EcoEnchants : RegistrableCategory<EcoEnchant>("enchant", "enchants") {
             EnchantmentPermanenceCurse(plugin),
             EnchantmentRepairing(plugin),
             EnchantmentReplenish(plugin),
-            EnchantmentSoulbound(plugin)
+            EnchantmentSoulbound(plugin),
+            EnchantmentWings(plugin),
+            EnchantmentVitalize(plugin),
+            EnchantmentReplanter(plugin),
+            EnchantmentPropulsion(plugin),
+            EnchantmentJellylegs(plugin),
+            EnchantmentStandAndFight(plugin)
         )
 
         for (enchantment in hardcodedEnchantments) {

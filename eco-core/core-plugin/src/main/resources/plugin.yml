@@ -11,6 +11,7 @@ softdepend:
   - libreforge
   - CMI
   - EssentialsX
+  - CapybaraMachinery
 
 commands:
   ecoenchants:
