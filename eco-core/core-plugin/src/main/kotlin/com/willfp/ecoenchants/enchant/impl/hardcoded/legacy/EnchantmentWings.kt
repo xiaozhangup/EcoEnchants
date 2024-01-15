@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.inventory.meta.Damageable
 import java.util.concurrent.TimeUnit
 
 class EnchantmentWings(
@@ -54,6 +55,14 @@ class EnchantmentWings(
 
             if (baffle.hasNext(player.name)) {
                 for ((item, _) in player.getItemsWithEnchantActive(enchant)) {
+                    val meta = item.itemMeta
+                    if (item.hasItemMeta() && meta is Damageable && meta.damage <= 0) {
+                        item.amount -= 1
+                        player.isFlying = false
+                        player.allowFlight = false
+                        continue
+                    }
+
                     item.damage(2)
                 }
             }
