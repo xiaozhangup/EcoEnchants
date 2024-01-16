@@ -38,6 +38,8 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
             return
         }
 
+        if (itemStack.enchantments.isEmpty() && itemStack.type != Material.ENCHANTED_BOOK) return // 不处理没有附魔的物品
+
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer
 
@@ -124,6 +126,8 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         if (!itemStack.isEnchantable && plugin.configYml.getBool("display.require-enchantable")) {
             return
         }
+
+        if (itemStack.enchantments.isEmpty()) return // 不处理没有附魔的物品
 
         val fast = itemStack.fast()
         val pdc = fast.persistentDataContainer

@@ -10,6 +10,7 @@ import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
 import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
 import me.xiaozhangup.ecoimpl.Baffle
 import org.bukkit.GameMode
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
@@ -38,6 +39,7 @@ class EnchantmentWings(
         private val plugin: EcoPlugin
     ) : Listener {
         val baffle = Baffle.of(1, TimeUnit.SECONDS)
+        val flying = mutableSetOf<String>()
 
         @EventHandler(
             ignoreCancelled = true
@@ -48,18 +50,21 @@ class EnchantmentWings(
             if (
                 !player.isFlying ||
                 player.gameMode != GameMode.SURVIVAL ||
-                !player.hasEnchantActive(enchant)
+                player.canFlight()
             ) {
                 return
+            }
+
+            if (!player.hasEnchantActive(enchant)) {
+                player.setFlight(false)
             }
 
             if (baffle.hasNext(player.name)) {
                 for ((item, _) in player.getItemsWithEnchantActive(enchant)) {
                     val meta = item.itemMeta
-                    if (item.hasItemMeta() && meta is Damageable && meta.damage <= 0) {
+                    if (item.hasItemMeta() && meta is Damageable && meta.damage >= item.type.maxDurability) {
                         item.amount -= 1
-                        player.isFlying = false
-                        player.allowFlight = false
+                        player.setFlight(false)
                         continue
                     }
 
@@ -73,18 +78,32 @@ class EnchantmentWings(
         fun handle(event: PlayerJumpEvent) {
             val player = event.player
 
-            if (player.gameMode != GameMode.SURVIVAL || player.isOp) return
-
-            if (!player.hasEnchantActive(enchant) && !player.isOp) {
-                player.allowFlight = false
-            } else {
-                player.allowFlight = true
+            if (player.gameMode != GameMode.SURVIVAL || player.canFlight()) return
+            if (player.hasEnchantActive(enchant)) {
+                player.setFlight(true)
             }
         }
 
         @EventHandler
         fun handle(event: PlayerQuitEvent) {
             baffle.reset(event.player.name)
+            flying.remove(event.player.name)
+        }
+
+        private fun Player.canFlight(): Boolean {
+            return allowFlight && !flying.contains(name)
+        }
+
+        private fun Player.setFlight(boolean: Boolean) {
+            if (boolean) {
+                flying.add(name)
+                allowFlight = true
+                isFlying = true
+            } else {
+                flying.remove(name)
+                allowFlight = false
+                isFlying = false
+            }
         }
     }
 }
