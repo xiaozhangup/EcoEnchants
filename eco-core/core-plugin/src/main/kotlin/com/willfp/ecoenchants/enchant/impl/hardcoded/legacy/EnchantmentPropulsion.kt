@@ -48,7 +48,8 @@ class EnchantmentPropulsion(
         fun handle(event: PlayerToggleSneakEvent) {
             val player = event.player
             if (!player.hasEnchantActive(enchant)) return
-            if (player.isJumping) {
+
+            if (!player.isOnGround && baffle.hasNext()) {
                 player.velocity = player.velocity.add(player.location.direction.setY(0.5))
             }
         }
