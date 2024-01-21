@@ -1,4 +1,4 @@
-package me.xiaozhangup.ecoimpl
+package com.willfp.ecoenchants.utils
 
 import com.google.common.collect.Maps
 import org.jetbrains.annotations.NotNull

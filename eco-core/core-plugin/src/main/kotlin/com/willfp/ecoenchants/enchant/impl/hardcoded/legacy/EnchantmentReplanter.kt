@@ -1,29 +1,18 @@
 package com.willfp.ecoenchants.enchant.impl.hardcoded.legacy
 
-import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import com.willfp.eco.core.EcoPlugin
-import com.willfp.eco.util.damage
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
 import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
-import me.xiaozhangup.ecoimpl.Baffle
-import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.block.data.Ageable
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
-import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.event.player.PlayerQuitEvent
-import java.util.concurrent.TimeUnit
 import kotlin.math.max
-import kotlin.math.min
 
 class EnchantmentReplanter(
     plugin: EcoEnchantsPlugin

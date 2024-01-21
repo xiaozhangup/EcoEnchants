@@ -8,7 +8,7 @@ import com.willfp.ecoenchants.enchant.EcoEnchant
 import com.willfp.ecoenchants.enchant.impl.HardcodedEcoEnchant
 import com.willfp.ecoenchants.target.EnchantFinder.getItemsWithEnchantActive
 import com.willfp.ecoenchants.target.EnchantFinder.hasEnchantActive
-import me.xiaozhangup.ecoimpl.Baffle
+import com.willfp.ecoenchants.utils.Baffle
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
